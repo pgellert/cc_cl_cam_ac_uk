@@ -46,7 +46,7 @@ int64_t *alloc(arena_t heap, int64_t n)
 int64_t read() {
   int64_t got = 0;
   printf("> ");
-  int result = scanf("%ld", &got);
+  int result = scanf("%lld", &got);
   if (result == EOF) {
     fprintf(stderr, "stdin died :(\n");
     exit(1);
@@ -66,7 +66,7 @@ int64_t giria(arena_t);
 /* of value it is ...                                                  */
 int main() {
   arena_t heap = create_arena(1024);
-  printf("%ld\n", giria(heap));
+  printf("%lld\n", giria(heap));
   arena_free (heap);   
   return 0;
 }
