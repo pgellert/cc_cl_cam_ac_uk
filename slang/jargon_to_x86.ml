@@ -118,7 +118,13 @@ let emit_x86 e =
 		   cmd "cqto"              "prepare for div (read x86 docs!)";		   
 		   cmd "idivq %r10"        "do the div, result in %rax"; 
 		   cmd "pushq %rax"        "END div, push result \n")
-	   
+
+	 | MOD -> (cmd "popq %r10"         "BEGIN div, , pop top-of-stack to %r10";
+   		   cmd "popq %rax"         "pop divisor into %rax";
+   		   cmd "cqto"              "prepare for div (read x86 docs!)";
+   		   cmd "idivq %r10"        "do the div, result in %rax, remainder in %rdx";
+   		   cmd "pushq %rdx"        "END mod, push result \n")
+
     in let mkpair () =
 	 (cmd "movq %r11,%rdi"        "BEGIN make pair, alloc arg 1 in %rdi"; 
 	  cmd "movq $2,%rsi"          "alloc arg 2 in %rsi";
